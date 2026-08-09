@@ -36,27 +36,41 @@ Aggiungendo un nuovo elemento tradotto: metti il testo italiano nell'HTML con
 ## Form di contatto
 
 Sul sito non compare nessun indirizzo email: i messaggi arrivano tramite
-[Web3Forms](https://web3forms.com), che inoltra alla casella registrata senza mai
-esporla nel codice della pagina.
+[FormSubmit](https://formsubmit.co), che non richiede alcuna registrazione.
 
-**Configurazione (una volta sola):**
+**Attivazione (una volta sola, ~2 minuti):**
 
-1. Su <https://web3forms.com> inserire l'indirizzo su cui ricevere i messaggi.
-2. Arriva una email con la *access key*: copiarla.
-3. In `assets/js/main.js` sostituire il segnaposto:
+1. Da terminale, inviare un messaggio di prova per attivare l'indirizzo
+   (sostituendo l'indirizzo con il proprio):
 
-   ```js
-   var ACCESS_KEY = 'INSERISCI-QUI-LA-TUA-ACCESS-KEY';
+   ```sh
+   curl -X POST https://formsubmit.co/ajax/tua.email@esempio.it \
+        -H 'Content-Type: application/json' \
+        -H 'Referer: https://antoniniluca.it/' \
+        -d '{"Nome":"Prova","Messaggio":"Attivazione del form"}'
    ```
 
-4. Commit e push.
+   L'header `Referer` è obbligatorio: senza, FormSubmit risponde
+   *«Make sure you open this page through a web server»* e non invia nulla.
 
-Finché la chiave non è inserita, il form mostra un messaggio d'errore esplicito
-invece di fallire in silenzio.
+2. Arriva una email da FormSubmit con un link di conferma: aprirlo.
+3. Nella pagina di conferma compare una **stringa casuale** (l'alias).
+   Copiarla.
+4. In `assets/js/main.js` sostituire il segnaposto:
 
-La access key è pensata per stare nel codice pubblico: consente solo di inviare
-messaggi a quella casella, non di leggerla né di risalire all'indirizzo. Il form
-include un campo *honeypot* nascosto che scarta gran parte dello spam automatico.
+   ```js
+   var ALIAS = 'INCOLLA-QUI-LA-STRINGA-DI-FORMSUBMIT';
+   ```
+
+5. Commit e push.
+
+L'indirizzo email non entra mai nel codice né nella cronologia git: nel sito
+finisce solo l'alias, che serve a recapitare i messaggi ma non rivela la casella
+né permette di leggerla.
+
+Finché l'alias non è inserito, il form mostra un messaggio d'errore esplicito
+invece di fallire in silenzio. Contro lo spam automatico c'è un campo *honeypot*
+nascosto (`_honey`), riconosciuto anche lato FormSubmit.
 
 ## Pubblicazione
 

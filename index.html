@@ -314,10 +314,11 @@
         <textarea id="f-messaggio" name="messaggio" required rows="6" maxlength="3000"></textarea>
       </div>
 
-      <!-- Honeypot anti-spam: invisibile agli umani, i bot lo compilano. -->
+      <!-- Honeypot anti-spam: invisibile agli umani, i bot lo compilano.
+           Il nome _honey è quello riconosciuto anche da FormSubmit. -->
       <label class="hp" aria-hidden="true">
         <span>Non compilare questo campo</span>
-        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off">
       </label>
 
       <div class="form__foot">

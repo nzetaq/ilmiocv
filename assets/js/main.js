@@ -113,7 +113,7 @@
       sending: 'Invio in corso…',
       ok: 'Messaggio inviato. Ti rispondo appena possibile.',
       err: 'Invio non riuscito. Riprova tra qualche minuto.',
-      notConfigured: 'Il form non è ancora configurato: manca la access key di Web3Forms.'
+      notConfigured: 'Il form non è ancora configurato: manca la stringa di FormSubmit.'
     },
     en: {
       required: 'This field is required.',
@@ -121,7 +121,7 @@
       sending: 'Sending…',
       ok: 'Message sent. I will get back to you as soon as possible.',
       err: 'Could not send the message. Please try again in a few minutes.',
-      notConfigured: 'The form is not configured yet: the Web3Forms access key is missing.'
+      notConfigured: 'The form is not configured yet: the FormSubmit string is missing.'
     }
   };
 
@@ -190,15 +190,15 @@
   });
 
   /* ---------------------------------------------------------
-     Form di contatto (Web3Forms)
+     Form di contatto (FormSubmit — nessun account da creare)
 
-     ACCESS_KEY va richiesta gratuitamente su https://web3forms.com
-     inserendo l'indirizzo su cui ricevere i messaggi. La chiave è
-     pensata per stare nel codice pubblico: non espone l'indirizzo
-     e permette solo di inviare messaggi a quella casella.
+     ALIAS è la stringa casuale che FormSubmit invia via email dopo
+     la conferma dell'indirizzo. Va usata al posto dell'indirizzo:
+     serve solo a recapitare i messaggi, non lo espone e non permette
+     di leggere la casella. Istruzioni complete nel README.
      --------------------------------------------------------- */
-  var ACCESS_KEY = 'INSERISCI-QUI-LA-TUA-ACCESS-KEY';
-  var ENDPOINT = 'https://api.web3forms.com/submit';
+  var ALIAS = 'INCOLLA-QUI-LA-STRINGA-DI-FORMSUBMIT';
+  var ENDPOINT = 'https://formsubmit.co/ajax/';
 
   var form = document.getElementById('contact-form');
   var status = document.getElementById('form-status');
@@ -278,7 +278,7 @@
 
       if (firstBad) { firstBad.focus(); return; }
 
-      if (ACCESS_KEY.indexOf('INSERISCI') === 0) {
+      if (ALIAS.indexOf('INCOLLA') === 0) {
         setStatus(t('notConfigured'), 'err');
         return;
       }
@@ -286,29 +286,37 @@
       var data = new FormData(form);
       var nome = String(data.get('nome')).trim();
       var cognome = String(data.get('cognome')).trim();
+      var mittente = String(data.get('email')).trim();
+
+      // Honeypot: se è compilato è un bot. Fingo l'invio riuscito e scarto.
+      if (data.get('_honey')) {
+        form.reset();
+        setStatus(t('ok'), 'ok');
+        return;
+      }
 
       var button = form.querySelector('button[type="submit"]');
       button.disabled = true;
       setStatus(t('sending'));
 
-      fetch(ENDPOINT, {
+      fetch(ENDPOINT + encodeURIComponent(ALIAS), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: ACCESS_KEY,
-          subject: 'antoniniluca.it — messaggio da ' + nome + ' ' + cognome,
-          from_name: 'antoniniluca.it',
-          name: nome + ' ' + cognome,
-          nome: nome,
-          cognome: cognome,
-          email: String(data.get('email')).trim(),
-          messaggio: String(data.get('messaggio')).trim(),
-          botcheck: data.get('botcheck') ? true : false
+          _subject: 'antoniniluca.it — messaggio da ' + nome + ' ' + cognome,
+          _template: 'table',
+          _captcha: 'false',
+          _replyto: mittente,
+          Nome: nome,
+          Cognome: cognome,
+          Email: mittente,
+          Messaggio: String(data.get('messaggio')).trim()
         })
       })
         .then(function (response) { return response.json(); })
         .then(function (result) {
-          if (result && result.success) {
+          // FormSubmit risponde con success come stringa "true".
+          if (result && (result.success === true || result.success === 'true')) {
             form.reset();
             setStatus(t('ok'), 'ok');
           } else {
