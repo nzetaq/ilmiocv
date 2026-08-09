@@ -33,27 +33,28 @@
     'about.body': 'Back-end developer specialized in building ETL processes for international banking and insurance groups, with experience in SQL, IBM DataStage, and Python with Apache Airflow. I work on data processing and transformation, and design datamarts and databases to support reporting and business analysis. Focused on <em>data quality</em>, I optimize workflows and ensure processes are robust and compliant with corporate standards.',
 
     'exp.title': 'Professional experience',
-    'exp.label.client': 'Client',
-    'exp.label.clients': 'Clients',
     'exp.label.stack': 'Tech stack',
     'exp.label.stack2': 'Tech stack',
 
-    'exp.j1.date': 'Jan 2025 — present',
-    'exp.j1.role': 'ETL Developer',
-    'exp.j1.place': 'Italy',
-    'exp.j1.summary': 'Reconstruction and migration of databases for the transition to Big Data technologies, with particular focus on data quality processes and processing pipelines.',
-    'exp.j1.b1': 'Design and development of end-to-end pipelines with Apache Airflow, fully implemented in Python.',
-    'exp.j1.b2': 'Implementation of SQL procedures for Data Quality checks.',
-    'exp.j1.b3': 'Database management and optimization through table partitioning and query tuning.',
+    'exp.employer.role': 'ETL Developer',
+    'exp.employer.place': 'Italy',
+    'exp.employer.period': 'Sep 2022 — present',
+    'exp.employer.intro': 'Two consecutive assignments on projects for banking and insurance groups, from the maintenance of established ETL procedures to the migration towards Big Data technologies.',
 
-    'exp.j2.date': 'Sep 2022 — Dec 2024',
-    'exp.j2.role': 'ETL Developer',
-    'exp.j2.place': 'Italy',
-    'exp.j2.summary': 'Development and maintenance of ETL procedures, testing and data quality to support reporting, regulatory supervision and accounting closing processes.',
-    'exp.j2.b1': 'Design and creation of datamarts and databases to support data processing and end-user reporting.',
-    'exp.j2.b2': 'Management and monitoring of data quality to ensure consistency, robustness and reliability of processes.',
-    'exp.j2.b3': 'Identification and resolution of anomalies in ETL systems through continuous monitoring.',
-    'exp.j2.b4': 'Testing activities focused on data quality and integrity, particularly in the context of banking supervision.',
+    'exp.e1.sector': 'Insurance',
+    'exp.e1.date': 'Jan 2025 — present',
+    'exp.e1.summary': 'Reconstruction and migration of databases towards Big Data technologies, with data quality processes and processing pipelines at the core of the project.',
+    'exp.e1.b1': 'End-to-end pipelines designed and developed with Apache Airflow, entirely in Python.',
+    'exp.e1.b2': 'Data quality checks implemented as SQL procedures.',
+    'exp.e1.b3': 'Databases optimized through table partitioning and query tuning.',
+
+    'exp.e2.sector': 'Banking',
+    'exp.e2.date': 'Sep 2022 — Dec 2024',
+    'exp.e2.summary': 'Development and maintenance of ETL procedures supporting reporting, regulatory supervision and accounting closing processes.',
+    'exp.e2.b1': 'Datamarts and databases designed and built to support data processing and end-user reporting.',
+    'exp.e2.b2': 'Data quality managed and monitored to ensure consistency, robustness and reliability of processes.',
+    'exp.e2.b3': 'Anomalies in ETL systems identified and resolved through continuous monitoring.',
+    'exp.e2.b4': 'Testing on data quality and integrity, particularly in the context of banking supervision.',
 
     'edu.title': 'Education',
     'edu.m.date': '2017 — 2020',
@@ -368,7 +369,7 @@
      resta visibile — e uso un semplice controllo geometrico allo scroll: su una
      quindicina di elementi costa nulla e non può lasciare la pagina bianca. */
   var candidates = Array.prototype.slice.call(
-    document.querySelectorAll('.section, .entry, .card, .panel')
+    document.querySelectorAll('.section, .entry, .engagement, .card, .panel')
   );
 
   var pending = candidates.filter(function (el) {
