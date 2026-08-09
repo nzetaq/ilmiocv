@@ -39,7 +39,6 @@
   "@type": "Person",
   "name": "Luca Antonini",
   "url": "https://antoniniluca.it/",
-  "email": "mailto:luca.antonini@protonmail.com",
   "jobTitle": "ETL Developer",
   "worksFor": { "@type": "Organization", "name": "Advancia Technology" },
   "alumniOf": { "@type": "CollegeOrUniversity", "name": "Università di Pisa" },
@@ -89,7 +88,7 @@
       Costruisco processi ETL e architetture dati per gruppi bancari e assicurativi internazionali.
     </p>
     <div class="hero__actions">
-      <a class="btn btn--primary" href="mailto:luca.antonini@protonmail.com" data-i18n="hero.cta1">Scrivimi</a>
+      <a class="btn btn--primary" href="#contact" data-i18n="hero.cta1">Scrivimi</a>
       <button type="button" class="btn btn--ghost" id="print-cv" data-i18n="hero.cta2">Salva il CV in PDF</button>
     </div>
   </section>
@@ -292,9 +291,44 @@
       Per opportunità professionali, collaborazioni o semplicemente per fare due chiacchiere sui dati,
       scrivimi pure: rispondo a tutti.
     </p>
-    <p class="contact__mail">
-      <a href="mailto:luca.antonini@protonmail.com">luca.antonini@protonmail.com</a>
-    </p>
+
+    <form class="form" id="contact-form" novalidate>
+      <div class="form__row">
+        <div class="field">
+          <label for="f-nome" data-i18n="form.nome">Nome</label>
+          <input type="text" id="f-nome" name="nome" required autocomplete="given-name" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="f-cognome" data-i18n="form.cognome">Cognome</label>
+          <input type="text" id="f-cognome" name="cognome" required autocomplete="family-name" maxlength="80">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-email" data-i18n="form.email">Email</label>
+        <input type="email" id="f-email" name="email" required autocomplete="email" maxlength="120">
+      </div>
+
+      <div class="field">
+        <label for="f-messaggio" data-i18n="form.messaggio">Messaggio</label>
+        <textarea id="f-messaggio" name="messaggio" required rows="6" maxlength="3000"></textarea>
+      </div>
+
+      <!-- Honeypot anti-spam: invisibile agli umani, i bot lo compilano. -->
+      <label class="hp" aria-hidden="true">
+        <span>Non compilare questo campo</span>
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+      </label>
+
+      <div class="form__foot">
+        <button type="submit" class="btn btn--primary" data-i18n="form.submit">Invia messaggio</button>
+        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+      </div>
+
+      <p class="form__privacy" data-i18n="form.privacy">
+        I dati che invii vengono usati solo per risponderti e non sono ceduti a terzi.
+      </p>
+    </form>
   </section>
 
 </main>

@@ -93,10 +93,37 @@
     'contact.title': 'Contact',
     'contact.body': 'For job opportunities, collaborations, or just to talk about data, feel free to write: I reply to everyone.',
 
+    'form.nome': 'First name',
+    'form.cognome': 'Last name',
+    'form.email': 'Email',
+    'form.messaggio': 'Message',
+    'form.submit': 'Send message',
+    'form.privacy': 'The data you send is used only to reply to you and is never shared with third parties.',
+
     'footer.note': 'Static site. No cookies, no tracking.'
   };
 
   var NAV_LABEL = { it: 'Sezioni', en: 'Sections' };
+
+  /* Messaggi runtime del form (non presenti nel markup). */
+  var MSG = {
+    it: {
+      required: 'Campo obbligatorio.',
+      email: 'Inserisci un indirizzo email valido.',
+      sending: 'Invio in corso…',
+      ok: 'Messaggio inviato. Ti rispondo appena possibile.',
+      err: 'Invio non riuscito. Riprova tra qualche minuto.',
+      notConfigured: 'Il form non è ancora configurato: manca la access key di Web3Forms.'
+    },
+    en: {
+      required: 'This field is required.',
+      email: 'Please enter a valid email address.',
+      sending: 'Sending…',
+      ok: 'Message sent. I will get back to you as soon as possible.',
+      err: 'Could not send the message. Please try again in a few minutes.',
+      notConfigured: 'The form is not configured yet: the Web3Forms access key is missing.'
+    }
+  };
 
   /* ---------------------------------------------------------
      i18n
@@ -118,8 +145,11 @@
     else el.innerHTML = value;
   }
 
+  var currentLang = 'it';
+
   function applyLang(lang) {
     var dict = lang === 'en' ? EN : IT;
+    currentLang = lang;
     nodes.forEach(function (el) {
       write(el, dict[el.getAttribute('data-i18n')]);
     });
@@ -133,6 +163,9 @@
     document.querySelectorAll('[data-set-lang]').forEach(function (btn) {
       btn.setAttribute('aria-pressed', String(btn.getAttribute('data-set-lang') === lang));
     });
+
+    // I messaggi del form resterebbero nella lingua precedente: li azzero.
+    resetFormMessages();
 
     try { localStorage.setItem('lang', lang); } catch (e) { /* storage non disponibile */ }
   }
@@ -155,6 +188,141 @@
       applyLang(btn.getAttribute('data-set-lang'));
     });
   });
+
+  /* ---------------------------------------------------------
+     Form di contatto (Web3Forms)
+
+     ACCESS_KEY va richiesta gratuitamente su https://web3forms.com
+     inserendo l'indirizzo su cui ricevere i messaggi. La chiave è
+     pensata per stare nel codice pubblico: non espone l'indirizzo
+     e permette solo di inviare messaggi a quella casella.
+     --------------------------------------------------------- */
+  var ACCESS_KEY = 'INSERISCI-QUI-LA-TUA-ACCESS-KEY';
+  var ENDPOINT = 'https://api.web3forms.com/submit';
+
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('form-status');
+
+  function t(key) {
+    return (MSG[currentLang] || MSG.it)[key];
+  }
+
+  function setStatus(text, kind) {
+    if (!status) return;
+    status.textContent = text || '';
+    status.className = 'form__status' + (kind ? ' is-' + kind : '');
+  }
+
+  function resetFormMessages() {
+    setStatus('');
+    document.querySelectorAll('.field.is-invalid').forEach(function (f) {
+      f.classList.remove('is-invalid');
+    });
+    document.querySelectorAll('.field__error').forEach(function (e) {
+      e.textContent = '';
+    });
+  }
+
+  function markInvalid(input, message) {
+    var field = input.closest('.field');
+    if (!field) return;
+    field.classList.add('is-invalid');
+
+    var error = field.querySelector('.field__error');
+    if (!error) {
+      error = document.createElement('p');
+      error.className = 'field__error';
+      field.appendChild(error);
+    }
+    error.textContent = message;
+    input.setAttribute('aria-invalid', 'true');
+  }
+
+  function clearInvalid(input) {
+    var field = input.closest('.field');
+    if (!field) return;
+    field.classList.remove('is-invalid');
+    var error = field.querySelector('.field__error');
+    if (error) error.textContent = '';
+    input.removeAttribute('aria-invalid');
+  }
+
+  if (form) {
+    var controls = Array.prototype.slice.call(
+      form.querySelectorAll('input[required], textarea[required]')
+    );
+
+    // Toglie l'errore appena l'utente corregge, senza aspettare l'invio.
+    controls.forEach(function (input) {
+      input.addEventListener('input', function () {
+        if (input.closest('.field').classList.contains('is-invalid')) clearInvalid(input);
+      });
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      resetFormMessages();
+
+      var firstBad = null;
+
+      controls.forEach(function (input) {
+        var value = input.value.trim();
+        if (!value) {
+          markInvalid(input, t('required'));
+          firstBad = firstBad || input;
+        } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+          markInvalid(input, t('email'));
+          firstBad = firstBad || input;
+        }
+      });
+
+      if (firstBad) { firstBad.focus(); return; }
+
+      if (ACCESS_KEY.indexOf('INSERISCI') === 0) {
+        setStatus(t('notConfigured'), 'err');
+        return;
+      }
+
+      var data = new FormData(form);
+      var nome = String(data.get('nome')).trim();
+      var cognome = String(data.get('cognome')).trim();
+
+      var button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      setStatus(t('sending'));
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          subject: 'antoniniluca.it — messaggio da ' + nome + ' ' + cognome,
+          from_name: 'antoniniluca.it',
+          name: nome + ' ' + cognome,
+          nome: nome,
+          cognome: cognome,
+          email: String(data.get('email')).trim(),
+          messaggio: String(data.get('messaggio')).trim(),
+          botcheck: data.get('botcheck') ? true : false
+        })
+      })
+        .then(function (response) { return response.json(); })
+        .then(function (result) {
+          if (result && result.success) {
+            form.reset();
+            setStatus(t('ok'), 'ok');
+          } else {
+            setStatus(t('err'), 'err');
+          }
+        })
+        .catch(function () {
+          setStatus(t('err'), 'err');
+        })
+        .then(function () {
+          button.disabled = false;
+        });
+    });
+  }
 
   /* ---------------------------------------------------------
      Tema
@@ -187,18 +355,53 @@
   /* ---------------------------------------------------------
      Reveal allo scroll
      --------------------------------------------------------- */
-  var revealables = document.querySelectorAll('.section, .entry, .card, .panel');
-  if ('IntersectionObserver' in window) {
-    revealables.forEach(function (el) { el.classList.add('reveal'); });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-    revealables.forEach(function (el) { io.observe(el); });
+  /* L'animazione è un vezzo: il contenuto non deve mai dipendere da essa.
+     Nascondo solo ciò che è già sotto la piega — quello che si vede all'arrivo
+     resta visibile — e uso un semplice controllo geometrico allo scroll: su una
+     quindicina di elementi costa nulla e non può lasciare la pagina bianca. */
+  var candidates = Array.prototype.slice.call(
+    document.querySelectorAll('.section, .entry, .card, .panel')
+  );
+
+  var pending = candidates.filter(function (el) {
+    return el.getBoundingClientRect().top > window.innerHeight * 0.92;
+  });
+
+  pending.forEach(function (el) { el.classList.add('reveal'); });
+
+  function sweep() {
+    var height = window.innerHeight;
+    pending = pending.filter(function (el) {
+      var box = el.getBoundingClientRect();
+      if (box.top < height * 0.92 && box.bottom > 0) {
+        el.classList.add('is-in');
+        return false;
+      }
+      return true;
+    });
+    if (!pending.length) {
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    }
+  }
+
+  var queued = false;
+  function schedule() {
+    if (queued) return;
+    queued = true;
+    window.requestAnimationFrame(function () { queued = false; sweep(); });
+  }
+
+  if (pending.length) {
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    window.addEventListener('load', schedule);
+    schedule();
+    // Ultima rete: se qualcosa impedisce lo scroll o il calcolo, mostro tutto.
+    setTimeout(function () {
+      pending.forEach(function (el) { el.classList.add('is-in'); });
+      pending = [];
+    }, 5000);
   }
 
   /* ---------------------------------------------------------

@@ -33,6 +33,31 @@ python3 -m http.server 8000
 Aggiungendo un nuovo elemento tradotto: metti il testo italiano nell'HTML con
 `data-i18n="chiave.nuova"` e aggiungi `'chiave.nuova': '...'` al dizionario `EN`.
 
+## Form di contatto
+
+Sul sito non compare nessun indirizzo email: i messaggi arrivano tramite
+[Web3Forms](https://web3forms.com), che inoltra alla casella registrata senza mai
+esporla nel codice della pagina.
+
+**Configurazione (una volta sola):**
+
+1. Su <https://web3forms.com> inserire l'indirizzo su cui ricevere i messaggi.
+2. Arriva una email con la *access key*: copiarla.
+3. In `assets/js/main.js` sostituire il segnaposto:
+
+   ```js
+   var ACCESS_KEY = 'INSERISCI-QUI-LA-TUA-ACCESS-KEY';
+   ```
+
+4. Commit e push.
+
+Finché la chiave non è inserita, il form mostra un messaggio d'errore esplicito
+invece di fallire in silenzio.
+
+La access key è pensata per stare nel codice pubblico: consente solo di inviare
+messaggi a quella casella, non di leggerla né di risalire all'indirizzo. Il form
+include un campo *honeypot* nascosto che scarta gran parte dello spam automatico.
+
 ## Pubblicazione
 
 Ogni push su `main` viene pubblicato automaticamente da GitHub Pages.
