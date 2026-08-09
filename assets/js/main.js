@@ -197,7 +197,7 @@
      serve solo a recapitare i messaggi, non lo espone e non permette
      di leggere la casella. Istruzioni complete nel README.
      --------------------------------------------------------- */
-  var ALIAS = 'INCOLLA-QUI-LA-STRINGA-DI-FORMSUBMIT';
+  var ALIAS = 'c47ae079cee7dfb63455bf223206523a';
   var ENDPOINT = 'https://formsubmit.co/ajax/';
 
   var form = document.getElementById('contact-form');
