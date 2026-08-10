@@ -416,20 +416,51 @@
   /* ---------------------------------------------------------
      Scrollspy sulla navigazione
      --------------------------------------------------------- */
-  var links = Array.prototype.slice.call(document.querySelectorAll('.topbar__nav a'));
-  var sections = links
-    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+  /* Attiva la voce dell'ultima sezione il cui inizio ha superato la linea
+     appena sotto la barra fissa. Una fascia di rilevamento centrata sullo
+     schermo, invece, sbaglia con le sezioni più corte di mezzo viewport:
+     la fascia cade già dentro la sezione seguente. */
+  var targets = Array.prototype.slice.call(document.querySelectorAll('.topbar__nav a'))
+    .map(function (link) {
+      var section = document.querySelector(link.getAttribute('href'));
+      return section ? { link: link, section: section } : null;
+    })
     .filter(Boolean);
 
-  if (sections.length && 'IntersectionObserver' in window) {
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        links.forEach(function (a) {
-          a.classList.toggle('is-active', a.getAttribute('href') === '#' + entry.target.id);
-        });
+  if (targets.length) {
+    var topbar = document.querySelector('.topbar');
+
+    var updateSpy = function () {
+      var line = (topbar ? topbar.offsetHeight : 0) + 12;
+      var current = null;
+
+      targets.forEach(function (t) {
+        if (t.section.getBoundingClientRect().top <= line) current = t;
       });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    sections.forEach(function (s) { spy.observe(s); });
+
+      // A fine pagina l'ultima sezione è quella che si sta leggendo, anche se
+      // è troppo corta perché il suo inizio superi la linea di riferimento.
+      var scrollBottom = window.innerHeight + window.pageYOffset;
+      if (scrollBottom >= document.documentElement.scrollHeight - 2) {
+        current = targets[targets.length - 1];
+      }
+
+      targets.forEach(function (t) {
+        t.link.classList.toggle('is-active', t === current);
+      });
+    };
+
+    var spyQueued = false;
+    var scheduleSpy = function () {
+      if (spyQueued) return;
+      spyQueued = true;
+      window.requestAnimationFrame(function () { spyQueued = false; updateSpy(); });
+    };
+
+    window.addEventListener('scroll', scheduleSpy, { passive: true });
+    window.addEventListener('resize', scheduleSpy);
+    window.addEventListener('load', scheduleSpy);
+    window.addEventListener('hashchange', scheduleSpy);
+    updateSpy();
   }
 })();
