@@ -339,10 +339,8 @@
   var toggle = document.getElementById('theme-toggle');
   if (toggle) {
     toggle.addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme');
-      if (!current) {
-        current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
+      // Il tema di base è scuro: senza attributo siamo su scuro.
+      var current = document.documentElement.getAttribute('data-theme') || 'dark';
       var next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       try { localStorage.setItem('theme', next); } catch (e) { /* ignore */ }

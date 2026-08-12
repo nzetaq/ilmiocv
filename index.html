@@ -17,6 +17,7 @@
 <meta property="og:locale" content="it_IT">
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0c1012">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -83,7 +84,7 @@
   <!-- ============ HERO ============ -->
   <section class="hero wrap">
     <p class="eyebrow" data-i18n="hero.eyebrow">ETL Developer · Data Engineering</p>
-    <h1>Luca Antonini</h1>
+    <h1>Luca Antonini<span class="caret" aria-hidden="true"></span></h1>
     <p class="hero__lead" data-i18n="hero.lead">
       Costruisco processi ETL e architetture dati per gruppi bancari e assicurativi internazionali.
     </p>
@@ -95,7 +96,8 @@
 
   <!-- ============ ABOUT ============ -->
   <section id="about" class="wrap section">
-    <h2 class="section__title"><span class="section__num">01</span><span data-i18n="about.title">Chi sono</span></h2>
+    <p class="section__query" aria-hidden="true"><span class="kw">SELECT</span> <span class="pun">*</span> <span class="kw">FROM</span> about<span class="pun">;</span> <span class="com">-- 01</span></p>
+    <h2 class="section__title" data-i18n="about.title">Chi sono</h2>
     <p class="prose" data-i18n="about.body">
       Back-end developer specializzato nella realizzazione di processi ETL per gruppi bancari e
       assicurativi internazionali, con esperienza in SQL, IBM DataStage e Python con Apache Airflow.
@@ -107,7 +109,8 @@
 
   <!-- ============ EXPERIENCE ============ -->
   <section id="experience" class="wrap section">
-    <h2 class="section__title"><span class="section__num">02</span><span data-i18n="exp.title">Esperienza professionale</span></h2>
+    <p class="section__query" aria-hidden="true"><span class="kw">SELECT</span> <span class="pun">*</span> <span class="kw">FROM</span> experience <span class="kw">ORDER BY</span> start_date <span class="kw">DESC</span><span class="pun">;</span> <span class="com">-- 02</span></p>
+    <h2 class="section__title" data-i18n="exp.title">Esperienza professionale</h2>
 
     <article class="employer">
       <header class="employer__head">
@@ -172,7 +175,8 @@
 
   <!-- ============ EDUCATION ============ -->
   <section id="education" class="wrap section">
-    <h2 class="section__title"><span class="section__num">03</span><span data-i18n="edu.title">Formazione</span></h2>
+    <p class="section__query" aria-hidden="true"><span class="kw">SELECT</span> <span class="pun">*</span> <span class="kw">FROM</span> education<span class="pun">;</span> <span class="com">-- 03</span></p>
+    <h2 class="section__title" data-i18n="edu.title">Formazione</h2>
 
     <div class="timeline">
       <article class="entry">
@@ -207,7 +211,8 @@
 
   <!-- ============ PROJECTS ============ -->
   <section id="projects" class="wrap section">
-    <h2 class="section__title"><span class="section__num">04</span><span data-i18n="proj.title">Progetti</span></h2>
+    <p class="section__query" aria-hidden="true"><span class="kw">SELECT</span> <span class="pun">*</span> <span class="kw">FROM</span> projects<span class="pun">;</span> <span class="com">-- 04</span></p>
+    <h2 class="section__title" data-i18n="proj.title">Progetti</h2>
 
     <div class="cards">
       <article class="card">
@@ -229,7 +234,8 @@
 
   <!-- ============ SKILLS ============ -->
   <section id="skills" class="wrap section">
-    <h2 class="section__title"><span class="section__num">05</span><span data-i18n="skills.title">Competenze</span></h2>
+    <p class="section__query" aria-hidden="true"><span class="kw">SELECT</span> <span class="pun">*</span> <span class="kw">FROM</span> skills<span class="pun">;</span> <span class="com">-- 05</span></p>
+    <h2 class="section__title" data-i18n="skills.title">Competenze</h2>
 
     <div class="grid">
 
@@ -295,7 +301,8 @@
 
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="wrap section section--contact">
-    <h2 class="section__title"><span class="section__num">06</span><span data-i18n="contact.title">Contatti</span></h2>
+    <p class="section__query" aria-hidden="true"><span class="kw">INSERT INTO</span> messages <span class="pun">(</span>nome<span class="pun">,</span> email<span class="pun">,</span> messaggio<span class="pun">)</span><span class="pun">;</span> <span class="com">-- 06</span></p>
+    <h2 class="section__title" data-i18n="contact.title">Contatti</h2>
     <p class="prose" data-i18n="contact.body">
       Per opportunità professionali, collaborazioni o semplicemente per fare due chiacchiere sui dati,
       scrivimi pure: rispondo a tutti.
