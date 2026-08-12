@@ -5,15 +5,46 @@ Sito personale / CV di Luca Antonini. Sito statico, nessuna dipendenza, nessun b
 ## Struttura
 
 ```
-index.html            pagina unica (italiano nel markup, inglese via dizionario JS)
-assets/css/style.css  stili, tema chiaro/scuro, foglio di stampa
-assets/js/main.js     i18n, tema, scrollspy, reveal
+index.html            il sito (tema "console SQL", scuro di default)
+cv.html               il curriculum: documento A4, colonna singola
+assets/css/style.css  stili del sito
+assets/css/cv.css     stili del curriculum, stampa inclusa
+assets/js/i18n.js     dizionario e motore di traduzione, condivisi
+assets/js/main.js     comportamenti del sito: form, tema, scrollspy, reveal
 assets/favicon.svg    favicon
 CNAME                 dominio custom per GitHub Pages
 robots.txt            indicizzazione
 sitemap.xml           sitemap
 .nojekyll             disattiva Jekyll su GitHub Pages
 ```
+
+Sono due documenti distinti di proposito: il sito racconta, il curriculum si
+stampa. Il CV non è il sito con un foglio di stile per la stampa, ma una pagina
+a sé, con metrica A4, colonna singola e nero su bianco.
+
+## Il curriculum
+
+`cv.html` sta in **una pagina A4** in entrambe le lingue. Il pulsante *Stampa /
+Salva in PDF* apre la finestra di stampa del browser: scegliendo "Salva come
+PDF" si ottiene il file da allegare alle candidature.
+
+Colonna singola per una ragione precisa: i sistemi automatici di screening (ATS)
+sbagliano spesso l'ordine del testo sui layout a due colonne.
+
+La scala di stampa si governa da **una riga sola**, nel blocco `@media print`
+in fondo a `cv.css`:
+
+```css
+html { font-size: 10.1pt; }
+```
+
+Tutte le misure del documento sono in `rem`, quindi si riferiscono a `<html>`:
+cambiando quel valore l'intero CV si ridimensiona mantenendo le proporzioni.
+Alzandolo troppo, il contenuto passa a due pagine.
+
+`cv.html` riporta recapiti diretti (telefono ed email) ed è perciò marcato
+`noindex`: resta raggiungibile da chiunque abbia il link, ma fuori dai motori di
+ricerca. Per renderlo indicizzabile, togliere il meta `robots` nell'`<head>`.
 
 ## Sviluppo locale
 
@@ -26,12 +57,30 @@ python3 -m http.server 8000
 
 ## Modificare i contenuti
 
-- **Testi italiani**: direttamente in `index.html` (sono il contenuto di default).
-- **Testi inglesi**: nell'oggetto `EN` in cima a `assets/js/main.js`. Ogni chiave
-  corrisponde all'attributo `data-i18n` dell'elemento corrispondente nell'HTML.
+- **Testi italiani**: direttamente in `index.html` e `cv.html` (sono il contenuto
+  di default: le pagine restano leggibili anche senza JavaScript).
+- **Testi inglesi**: nell'oggetto `EN` in cima a `assets/js/i18n.js`. Il
+  dizionario è **unico per entrambe le pagine**: una trentina di chiavi sono
+  condivise, quindi correggere un testo lo corregge in tutti e due i posti.
 
 Aggiungendo un nuovo elemento tradotto: metti il testo italiano nell'HTML con
 `data-i18n="chiave.nuova"` e aggiungi `'chiave.nuova': '...'` al dizionario `EN`.
+
+Per controllare che non manchi nulla dopo una modifica:
+
+```sh
+python3 - <<'EOF'
+import re
+d = open('assets/js/i18n.js').read()
+defined = set(re.findall(r"^\s*'([^']+)':", d.split('var EN = {')[1].split('\n  };')[0], re.M))
+used = set()
+for page in ['index.html', 'cv.html']:
+    u = set(re.findall(r'data-i18n="([^"]+)"', open(page).read()))
+    used |= u
+    print(page, '-> mancanti:', sorted(u - defined) or 'nessuna')
+print('orfane:', sorted(defined - used) or 'nessuna')
+EOF
+```
 
 ## Form di contatto
 

@@ -1,0 +1,302 @@
+/* =========================================================
+   Luca Antonini — curriculum vitae (cv.html)
+
+   Questo NON è il sito: è un documento. Colonna singola, metrica
+   A4, nero su bianco, pensato prima per la stampa e poi per lo
+   schermo — dove il foglio è mostrato come tale, su un piano scuro.
+   ========================================================= */
+
+:root {
+  --paper:   #ffffff;
+  --desk:    #14181a;
+  --ink:     #14181a;
+  --ink-dim: #3d4a48;
+  --ink-mute:#6a7a77;
+  --rule:    #d3dbd9;
+  --accent:  #0d6c66;
+
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--desk);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { margin: 0; line-height: 1.25; font-weight: 600; }
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.dot { color: var(--ink-mute); margin-inline: .3em; }
+
+/* =========================================================
+   Barra strumenti — solo a schermo
+   ========================================================= */
+.toolbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  padding: .75rem 1.25rem;
+  background: rgba(12, 16, 18, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #26302f;
+  font: 500 .8rem/1 var(--mono);
+  color: #9bb0ac;
+}
+.toolbar__right { display: flex; align-items: center; gap: .6rem; }
+.toolbar__back { text-decoration: none; color: #9bb0ac; }
+.toolbar__back:hover { color: #e6edeb; }
+
+.langswitch { display: inline-flex; border: 1px solid #2b3634; border-radius: 4px; overflow: hidden; }
+.langswitch button {
+  font: 600 .72rem/1 var(--mono);
+  padding: .4rem .5rem; border: 0; background: transparent; color: #7d918e; cursor: pointer;
+}
+.langswitch button:hover { color: #e6edeb; }
+.langswitch button[aria-pressed="true"] { background: #4fd0c4; color: #06110f; }
+
+.toolbar__print {
+  font: 500 .75rem/1 var(--mono);
+  padding: .48rem .8rem;
+  border: 1px solid #2b3634; border-radius: 4px;
+  background: transparent; color: #9bb0ac; cursor: pointer;
+}
+.toolbar__print:hover { border-color: #4fd0c4; color: #e6edeb; }
+
+/* =========================================================
+   Il foglio
+   ========================================================= */
+.sheet {
+  display: block;
+  width: 210mm;
+  max-width: 100%;
+  min-height: 297mm;
+  margin: 2rem auto;
+  padding: 18mm 18mm 16mm;
+  background: var(--paper);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, .45);
+}
+
+/* =========================================================
+   Intestazione
+   ========================================================= */
+.cv-head {
+  padding-bottom: .9rem;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 1.4rem;
+}
+.cv-name {
+  font-size: 1.95rem;
+  letter-spacing: -0.015em;
+  margin-bottom: .15rem;
+}
+.cv-role {
+  font: 500 .92rem/1.4 var(--font);
+  color: var(--accent);
+  margin-bottom: .55rem;
+}
+.cv-contacts {
+  display: flex; flex-wrap: wrap;
+  font: 400 .8rem/1.5 var(--mono);
+  color: var(--ink-dim);
+}
+.cv-contacts li { white-space: nowrap; }
+.cv-contacts li + li::before {
+  content: "·";
+  color: var(--ink-mute);
+  margin-inline: .5em;
+}
+.cv-contacts a { text-decoration: none; }
+.cv-contacts a:hover { text-decoration: underline; }
+
+/* =========================================================
+   Sezioni
+   ========================================================= */
+.cv-section { margin-bottom: 1.5rem; }
+.cv-section--last { margin-bottom: 0; }
+
+.cv-section__title {
+  font: 600 .74rem/1 var(--font);
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  color: var(--ink);
+  padding-bottom: .35rem;
+  margin-bottom: .8rem;
+  border-bottom: 1px solid var(--rule);
+  break-after: avoid;
+}
+
+.cv-profile { color: var(--ink-dim); max-width: 60em; }
+.cv-profile em { font-style: normal; font-weight: 600; color: var(--ink); }
+
+/* =========================================================
+   Esperienza
+   ========================================================= */
+.cv-job { break-inside: auto; }
+
+.cv-job__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+}
+.cv-job__role { font-size: 1.02rem; }
+.cv-job__date {
+  font: 500 .78rem/1.4 var(--mono);
+  color: var(--ink-mute);
+  white-space: nowrap;
+}
+.cv-job__org {
+  font-size: .9rem; font-weight: 500;
+  color: var(--ink-dim);
+  margin-bottom: .5rem;
+}
+
+/* incarico presso un cliente */
+.cv-task {
+  padding-left: .85rem;
+  border-left: 2px solid var(--rule);
+  margin-top: .75rem;
+  break-inside: avoid;
+}
+.cv-task__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  margin-bottom: .3rem;
+}
+/* La riga cliente può essere lunga: la lascio restringere e andare a capo
+   al proprio interno, così la data resta allineata a destra sulla prima riga
+   invece di essere spinta sotto. */
+.cv-task__client { flex: 1 1 12rem; min-width: 0; font-size: .9rem; font-weight: 600; }
+.cv-task__label {
+  font: 500 .68rem/1 var(--mono);
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--ink-mute);
+  margin-right: .4rem;
+}
+.cv-task__date {
+  font: 500 .76rem/1.4 var(--mono);
+  color: var(--ink-mute);
+  white-space: nowrap;
+}
+.cv-task__summary { font-size: .88rem; color: var(--ink-dim); margin-bottom: .4rem; }
+
+.cv-list { display: flex; flex-direction: column; gap: .22rem; }
+.cv-list li {
+  position: relative;
+  padding-left: .85rem;
+  font-size: .88rem;
+  color: var(--ink-dim);
+}
+.cv-list li::before {
+  content: "–";
+  position: absolute; left: 0; top: 0;
+  color: var(--ink-mute);
+}
+.cv-list strong { color: var(--ink); font-weight: 600; }
+
+.cv-stack {
+  margin-top: .45rem;
+  font: 400 .78rem/1.5 var(--mono);
+  color: var(--ink-dim);
+}
+.cv-stack__label {
+  font-weight: 500;
+  text-transform: uppercase; letter-spacing: .08em;
+  font-size: .68rem;
+  color: var(--ink-mute);
+  margin-right: .45rem;
+}
+
+/* =========================================================
+   Formazione e progetti
+   ========================================================= */
+.cv-edu, .cv-proj { break-inside: avoid; }
+.cv-edu + .cv-edu { margin-top: .8rem; }
+.cv-edu__degree, .cv-proj__name { font-size: .95rem; }
+
+.cv-proj__link {
+  margin-top: .35rem;
+  font: 400 .78rem/1.4 var(--mono);
+  color: var(--accent);
+}
+.cv-proj__link a { text-decoration: none; }
+.cv-proj__link a:hover { text-decoration: underline; }
+
+/* =========================================================
+   Competenze
+   ========================================================= */
+.cv-skills {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: .4rem 1rem;
+  margin: 0;
+  font-size: .88rem;
+}
+.cv-skills dt {
+  font: 500 .7rem/1.6 var(--mono);
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--ink-mute);
+}
+.cv-skills dd { margin: 0; color: var(--ink-dim); }
+
+.cv-interests { font-size: .88rem; color: var(--ink-dim); }
+
+/* =========================================================
+   Schermi stretti
+   ========================================================= */
+@media (max-width: 40rem) {
+  .sheet { padding: 1.5rem 1.25rem; margin: 1rem auto; min-height: 0; }
+  .cv-skills { grid-template-columns: 1fr; gap: .1rem; }
+  .cv-skills dd { margin-bottom: .5rem; }
+  .cv-job__date, .cv-task__date { white-space: normal; }
+}
+
+/* =========================================================
+   Stampa — qui il documento è a casa sua
+   ========================================================= */
+@page { size: A4; margin: 11mm 14mm; }
+
+@media print {
+  /* Tutte le misure del documento sono in rem, quindi si riferiscono a
+     <html>, non a <body>: la scala di stampa si governa da qui, in un
+     punto solo, e ogni proporzione resta quella pensata a schermo. */
+  html { font-size: 10.1pt; }
+
+  body { background: #fff; font-size: 1rem; line-height: 1.34; }
+  .toolbar { display: none !important; }
+
+  .sheet {
+    width: auto; max-width: none; min-height: 0;
+    margin: 0; padding: 0;
+    box-shadow: none;
+  }
+
+  /* spaziature verticali: in millimetri, indipendenti dal corpo */
+  .cv-head { padding-bottom: 2.4mm; margin-bottom: 3.4mm; }
+  .cv-section { margin-bottom: 3.4mm; }
+  .cv-section__title { margin-bottom: 2mm; padding-bottom: 1mm; }
+  .cv-task { margin-top: 2.2mm; }
+  .cv-list { gap: .5mm; }
+  .cv-edu + .cv-edu { margin-top: 2.4mm; }
+  .cv-job__org { margin-bottom: 1.4mm; }
+  .cv-stack { margin-top: 1.5mm; }
+  .cv-proj__link { margin-top: 1.2mm; }
+
+  /* inchiostro: tutto in nero, niente colori di superficie */
+  .cv-role { color: #000; }
+  .cv-contacts { color: #222; }
+  .cv-job__date, .cv-task__date { color: #333; }
+  .cv-profile, .cv-task__summary, .cv-list li, .cv-skills dd { color: #1a1a1a; }
+  .cv-proj__link { color: #000; }
+  a { text-decoration: none; color: inherit; }
+}
