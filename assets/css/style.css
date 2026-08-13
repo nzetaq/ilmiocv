@@ -455,6 +455,73 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
 }
 
 /* =========================================================
+   Oracle — una console che risponde sempre la stessa cosa
+   ========================================================= */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.oracle {
+  margin-top: 1.75rem;
+  max-width: 44rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.oracle__log {
+  display: flex; flex-direction: column; gap: .9rem;
+  padding: 1.15rem 1.3rem;
+  max-height: 22rem; overflow-y: auto;
+  border-bottom: 1px solid var(--line);
+}
+.oracle__log:empty { display: none; }
+
+.oracle__q {
+  font: 500 .9rem/1.6 var(--mono);
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.oracle__q::before { content: "> "; color: var(--accent); }
+
+.oracle__a {
+  font: 400 .9rem/1.7 var(--mono);
+  color: var(--sql-str);
+  padding-left: .9rem;
+  border-left: 2px solid var(--line);
+  min-height: 1.7em;
+  overflow-wrap: anywhere;
+}
+
+.oracle__caret {
+  display: inline-block;
+  width: .5em; height: .95em;
+  background: var(--accent);
+  vertical-align: -.1em;
+  animation: blink 1.15s step-end infinite;
+}
+
+.oracle__bar {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .7rem .9rem;
+  background: var(--bg-subtle);
+}
+.oracle__prompt { font: 600 .95rem/1 var(--mono); color: var(--accent); }
+.oracle__bar input {
+  flex: 1; min-width: 0;
+  background: transparent; border: 0;
+  color: var(--text);
+  font: 400 .9rem/1.5 var(--mono);
+  padding: .45rem 0;
+}
+.oracle__bar input::placeholder { color: var(--text-mute); }
+.oracle__bar input:focus { outline: none; }
+.oracle__bar .btn { padding: .55rem .95rem; }
+
+/* =========================================================
    Contatti + footer
    ========================================================= */
 .section--contact { padding-bottom: 4rem; }
@@ -543,7 +610,8 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
     --accent: #000; --accent-txt: #000; --accent-dim: transparent; --on-accent: #fff;
     --sql-kw: #444; --sql-str: #222; --sql-num: #444; --sql-com: #666; --sql-pun: #666;
   }
-  .topbar, .footer__note, .hero__actions, .skip-link, .form, .caret { display: none !important; }
+  .topbar, .footer__note, .hero__actions, .skip-link, .form, .caret,
+  #oracle { display: none !important; }
   .hero::before { display: none !important; }
   body { font-size: 10.5pt; line-height: 1.45; }
   .wrap { max-width: none; padding-inline: 0; }

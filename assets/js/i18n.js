@@ -23,6 +23,7 @@
     'nav.education': 'Education',
     'nav.projects': 'Projects',
     'nav.skills': 'Skills',
+    'nav.oracle': 'Oracle',
     'nav.contact': 'Contact',
 
     'hero.eyebrow': 'ETL Developer · Data Engineering',
@@ -96,6 +97,14 @@
     'skills.int.b2': 'Data management',
     'skills.int.b3': 'Epistemology and methodology',
 
+    /* ---- oracle ---- */
+    'oracle.title': 'Oracle',
+    'oracle.intro': 'Ask me anything about my work.',
+    'oracle.label': 'Your question',
+    'oracle.placeholder': 'Ask something…',
+    'oracle.send': 'Ask',
+    'oracle.answer': 'If you want to talk about my experience or my skills, write to me. No oracle can replace knowing someone in person.',
+
     /* ---- contatti e form ---- */
     'contact.title': 'Contact',
     'contact.body': 'For job opportunities, collaborations, or just to talk about data, feel free to write: I reply to everyone.',
@@ -136,12 +145,17 @@
   var NAV_LABEL = { it: 'Sezioni', en: 'Sections' };
 
   var nodes = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+  var placeholders = Array.prototype.slice.call(document.querySelectorAll('[data-i18n-ph]'));
   var IT = {};                 // testi italiani così come stanno nel markup
   var listeners = [];
   var lang = 'it';
 
   nodes.forEach(function (el) {
     IT[el.getAttribute('data-i18n')] = read(el);
+  });
+
+  placeholders.forEach(function (el) {
+    IT[el.getAttribute('data-i18n-ph')] = el.getAttribute('placeholder');
   });
 
   function read(el) {
@@ -160,6 +174,11 @@
 
     nodes.forEach(function (el) {
       write(el, dict[el.getAttribute('data-i18n')]);
+    });
+
+    placeholders.forEach(function (el) {
+      var value = dict[el.getAttribute('data-i18n-ph')];
+      if (value != null) el.setAttribute('placeholder', value);
     });
 
     document.documentElement.lang = next;

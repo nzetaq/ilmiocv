@@ -176,6 +176,88 @@
   }
 
   /* ---------------------------------------------------------
+     Oracle
+
+     Risponde sempre la stessa cosa: è il punto. Il testo sta in
+     #oracle-answer nell'HTML, quindi passa dal dizionario come
+     ogni altra frase e resta modificabile senza toccare il JS.
+     --------------------------------------------------------- */
+  var oracleForm = document.getElementById('oracle-form');
+
+  if (oracleForm) {
+    var oracleLog = document.getElementById('oracle-log');
+    var oracleInput = document.getElementById('oracle-input');
+    var oracleAnswer = document.getElementById('oracle-answer');
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var thinking = false;
+    var MAX_SCAMBI = 8;
+
+    // Cambiando lingua la trascrizione resterebbe in quella precedente.
+    if (window.I18N) {
+      window.I18N.onChange(function () { oracleLog.textContent = ''; });
+    }
+
+    function appendLine(className, text) {
+      var line = document.createElement('p');
+      line.className = className;
+      line.textContent = text || '';
+      oracleLog.appendChild(line);
+      return line;
+    }
+
+    function trimLog() {
+      // Ogni scambio sono due righe: domanda e risposta.
+      while (oracleLog.children.length > MAX_SCAMBI * 2) {
+        oracleLog.removeChild(oracleLog.firstChild);
+      }
+    }
+
+    function reveal(line, text, done) {
+      if (calm) { line.textContent = text; done(); return; }
+
+      var i = 0;
+      var caret = document.createElement('span');
+      caret.className = 'oracle__caret';
+      line.appendChild(caret);
+
+      var timer = setInterval(function () {
+        line.textContent = text.slice(0, ++i);
+        if (i < text.length) {
+          line.appendChild(caret);
+        } else {
+          clearInterval(timer);
+          done();
+        }
+        oracleLog.scrollTop = oracleLog.scrollHeight;
+      }, 18);
+    }
+
+    oracleForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (thinking) return;
+
+      var question = oracleInput.value.trim();
+      if (!question) { oracleInput.focus(); return; }
+
+      appendLine('oracle__q', question);
+      oracleInput.value = '';
+      trimLog();
+      oracleLog.scrollTop = oracleLog.scrollHeight;
+
+      thinking = true;
+      var line = appendLine('oracle__a', '');
+
+      // Una breve attesa prima di rispondere: senza, sembra un errore.
+      setTimeout(function () {
+        reveal(line, oracleAnswer.textContent.trim(), function () {
+          thinking = false;
+          oracleLog.scrollTop = oracleLog.scrollHeight;
+        });
+      }, calm ? 0 : 420);
+    });
+  }
+
+  /* ---------------------------------------------------------
      Tema
      --------------------------------------------------------- */
   var toggle = document.getElementById('theme-toggle');

@@ -61,6 +61,7 @@
       <a href="#education" data-i18n="nav.education">Formazione</a>
       <a href="#projects" data-i18n="nav.projects">Progetti</a>
       <a href="#skills" data-i18n="nav.skills">Competenze</a>
+      <a href="#oracle" data-i18n="nav.oracle">Oracle</a>
       <a href="#contact" data-i18n="nav.contact">Contatti</a>
     </nav>
     <div class="topbar__tools">
@@ -299,9 +300,33 @@
     </div>
   </section>
 
+  <!-- ============ ORACLE ============ -->
+  <section id="oracle" class="wrap section">
+    <p class="section__query" aria-hidden="true"><span class="kw">SELECT</span> answer <span class="kw">FROM</span> oracle <span class="kw">WHERE</span> question <span class="pun">=</span> <span class="str">'?'</span><span class="pun">;</span> <span class="com">-- 06</span></p>
+    <h2 class="section__title" data-i18n="oracle.title">Oracle</h2>
+    <p class="prose" data-i18n="oracle.intro">
+      Chiedimi quello che vuoi sul mio lavoro.
+    </p>
+
+    <div class="oracle">
+      <div class="oracle__log" id="oracle-log" role="log" aria-live="polite"></div>
+      <form class="oracle__bar" id="oracle-form">
+        <label class="sr-only" for="oracle-input" data-i18n="oracle.label">La tua domanda</label>
+        <span class="oracle__prompt" aria-hidden="true">&gt;</span>
+        <input type="text" id="oracle-input" name="question" autocomplete="off" maxlength="200"
+               data-i18n-ph="oracle.placeholder" placeholder="Chiedi qualcosa…">
+        <button type="submit" class="btn btn--primary" data-i18n="oracle.send">Chiedi</button>
+      </form>
+    </div>
+
+    <!-- La risposta vive qui, così resta modificabile nell'HTML e passa
+         dal dizionario come ogni altro testo. Il JS la legge di qui. -->
+    <p id="oracle-answer" hidden data-i18n="oracle.answer">Se vuoi parlare delle mie esperienze o delle mie competenze, scrivimi. Non c'è oracolo che possa sostituire la conoscenza di persona.</p>
+  </section>
+
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="wrap section section--contact">
-    <p class="section__query" aria-hidden="true"><span class="kw">INSERT INTO</span> messages <span class="pun">(</span>nome<span class="pun">,</span> email<span class="pun">,</span> messaggio<span class="pun">)</span><span class="pun">;</span> <span class="com">-- 06</span></p>
+    <p class="section__query" aria-hidden="true"><span class="kw">INSERT INTO</span> messages <span class="pun">(</span>nome<span class="pun">,</span> email<span class="pun">,</span> messaggio<span class="pun">)</span><span class="pun">;</span> <span class="com">-- 07</span></p>
     <h2 class="section__title" data-i18n="contact.title">Contatti</h2>
     <p class="prose" data-i18n="contact.body">
       Per opportunità professionali, collaborazioni o semplicemente per fare due chiacchiere sui dati,
