@@ -116,7 +116,7 @@
     'form.submit': 'Send message',
     'form.privacy': 'The data you send is used only to reply to you and is never shared with third parties.',
 
-    'footer.note': 'Static site. No cookies, no tracking.',
+    'footer.note': 'Static site. No cookies, no tracking. Design and implementation made entirely with Claude Code.',
 
     /* ---- curriculum (cv.html) ---- */
     'cv.meta.title': 'Luca Antonini — Curriculum Vitae',
