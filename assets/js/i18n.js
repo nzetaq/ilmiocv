@@ -66,6 +66,8 @@
     'edu.m.org': 'University of Pisa',
     'edu.m.b1': 'Grade: <strong>110/110 with honours</strong>.',
     'edu.m.b2': 'Topics: mathematical logic and formal semantics, philosophy of language, ontology.',
+    'cv.edu.m.meta': 'Grade: <strong>110/110 with honours</strong>. Mathematical logic and formal semantics, philosophy of language, ontology.',
+    'cv.edu.b.meta': 'Grade: <strong>110/110 with honours</strong>. Mathematical logic and formal semantics, philosophy of language, ontology.',
     'edu.b.date': '2013 — 2017',
     'edu.b.degree': 'Bachelor’s Degree in Philosophy — L-5',
     'edu.b.org': 'University of Pisa',
@@ -128,18 +130,21 @@
     'cv.exp.client': 'Client',
     'cv.exp.clients': 'Clients',
     'cv.edu.title': 'Education',
-    'cv.skills.title': 'Skills',
+    'cv.contacts.title': 'Contacts',
     'cv.skills.machine': 'Technical',
+    'cv.level.adv': 'Advanced',
     'cv.skills.tools': 'Tools',
     'cv.skills.lang': 'Languages',
     'cv.skills.soft': 'Soft skills',
-    'cv.skills.machine.v': 'SQL (advanced) · Python (advanced)',
-    'cv.skills.lang.v': 'Italian (native) · English (B2/C1)',
-    'cv.skills.soft.v': 'Logical approach · Problem solving · Team work',
+
+    /* Le voci della colonna laterale sono elenchi: la traduzione porta con sé
+       il proprio markup, altrimenti sostituirebbe le righe con una stringa. */
+    'cv.skills.lang.v': '<li>Italian (native)</li><li>English (B2/C1)</li>',
+    'cv.skills.soft.v': '<li>Logical approach</li><li>Problem solving</li><li>Team work</li>',
     'cv.proj.title': 'Projects',
     'cv.proj.craveit.body': 'Implementation of text analytics methods to classify the best restaurants in Rome.',
     'cv.int.title': 'Interests',
-    'cv.int.v': 'Logic and formal semantics · Data management · Epistemology and methodology'
+    'cv.int.v': '<li>Logic and formal semantics</li><li>Data management</li><li>Epistemology and methodology</li>'
   };
 
   var NAV_LABEL = { it: 'Sezioni', en: 'Sections' };

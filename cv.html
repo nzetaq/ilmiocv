@@ -29,154 +29,201 @@
 
 <main class="sheet">
 
-  <!-- ============ INTESTAZIONE ============ -->
-  <header class="cv-head">
-    <h1 class="cv-name">Luca Antonini</h1>
+  <!-- ============ COLONNA LATERALE ============ -->
+  <aside class="cv-side">
+
+    <h1 class="cv-name">Luca<br>Antonini</h1>
     <p class="cv-role" data-i18n="cv.role">ETL Developer · Data Engineering</p>
-    <ul class="cv-contacts">
-      <li>Empoli (FI)</li>
-      <li><a href="tel:+393888109755">+39 388 810 9755</a></li>
-      <li><a href="mailto:luca.antonini@protonmail.com">luca.antonini@protonmail.com</a></li>
-      <li><a href="https://antoniniluca.it" target="_blank" rel="noopener noreferrer">antoniniluca.it</a></li>
-    </ul>
-  </header>
 
-  <!-- ============ PROFILO ============ -->
-  <section class="cv-section">
-    <h2 class="cv-section__title" data-i18n="cv.profile">Profilo</h2>
-    <p class="cv-profile" data-i18n="about.body">
-      Back-end developer specializzato nella realizzazione di processi ETL per gruppi bancari e
-      assicurativi internazionali, con esperienza in SQL, IBM DataStage e Python con Apache Airflow.
-      Lavoro sull'elaborazione e la trasformazione dei dati e progetto datamart e database a supporto
-      di reportistica e analisi di business. Con particolare attenzione alla <em>data quality</em>,
-      ottimizzo i workflow e garantisco processi robusti e conformi agli standard aziendali.
-    </p>
-  </section>
-
-  <!-- ============ ESPERIENZA ============ -->
-  <section class="cv-section">
-    <h2 class="cv-section__title" data-i18n="cv.exp.title">Esperienza professionale</h2>
-
-    <article class="cv-job">
-      <div class="cv-job__head">
-        <h3 class="cv-job__role" data-i18n="exp.employer.role">ETL Developer</h3>
-        <p class="cv-job__date" data-i18n="exp.employer.period">Set 2022 — oggi</p>
-      </div>
-      <p class="cv-job__org">Advancia Technology <span class="dot">·</span> <span data-i18n="exp.employer.place">Italia</span></p>
-
-      <div class="cv-task">
-        <div class="cv-task__head">
-          <p class="cv-task__client">
-            <span class="cv-task__label" data-i18n="cv.exp.client">Cliente</span>
-            BNP Cardif
-          </p>
-          <p class="cv-task__date" data-i18n="exp.e1.date">Gen 2025 — oggi</p>
-        </div>
-        <p class="cv-task__summary" data-i18n="exp.e1.summary">
-          Ricostruzione e migrazione dei database verso tecnologie Big Data, con i processi
-          di data quality e le pipeline di elaborazione al centro del progetto.
-        </p>
-        <ul class="cv-list">
-          <li data-i18n="exp.e1.b1">Pipeline end-to-end progettate e sviluppate con Apache Airflow, interamente in Python.</li>
-          <li data-i18n="exp.e1.b2">Controlli di data quality implementati come procedure SQL.</li>
-          <li data-i18n="exp.e1.b3">Database ottimizzati tramite partizionamento delle tabelle e tuning delle query.</li>
-        </ul>
-        <p class="cv-stack"><span class="cv-stack__label" data-i18n="exp.label.stack">Tech stack</span>
-          Starburst <span class="dot">·</span> SQL (Trino/Presto) <span class="dot">·</span> Python <span class="dot">·</span> Airflow <span class="dot">·</span> S3 <span class="dot">·</span> Git</p>
-      </div>
-
-      <div class="cv-task">
-        <div class="cv-task__head">
-          <p class="cv-task__client">
-            <span class="cv-task__label" data-i18n="cv.exp.clients">Clienti</span>
-            Santander Consumer Bank <span class="dot">·</span> Findomestic <span class="dot">·</span> Banco BPM
-          </p>
-          <p class="cv-task__date" data-i18n="exp.e2.date">Set 2022 — Dic 2024</p>
-        </div>
-        <p class="cv-task__summary" data-i18n="exp.e2.summary">
-          Sviluppo e manutenzione di procedure ETL a supporto di reportistica, vigilanza
-          regolamentare e processi di chiusura contabile.
-        </p>
-        <ul class="cv-list">
-          <li data-i18n="exp.e2.b1">Datamart e database progettati e realizzati a supporto dell'elaborazione dei dati e della reportistica per l'utente finale.</li>
-          <li data-i18n="exp.e2.b2">Data quality gestita e monitorata per garantire coerenza, robustezza e affidabilità dei processi.</li>
-          <li data-i18n="exp.e2.b3">Anomalie nei sistemi ETL individuate e risolte grazie a un monitoraggio continuo.</li>
-          <li data-i18n="exp.e2.b4">Testing su qualità e integrità del dato, in particolare nell'ambito della vigilanza bancaria.</li>
-        </ul>
-        <p class="cv-stack"><span class="cv-stack__label" data-i18n="exp.label.stack2">Tech stack</span>
-          Oracle PL/SQL <span class="dot">·</span> SQL Server <span class="dot">·</span> IBM DataStage</p>
-      </div>
-    </article>
-  </section>
-
-  <!-- ============ FORMAZIONE ============ -->
-  <section class="cv-section">
-    <h2 class="cv-section__title" data-i18n="cv.edu.title">Formazione</h2>
-
-    <article class="cv-edu">
-      <div class="cv-job__head">
-        <h3 class="cv-edu__degree" data-i18n="edu.m.degree">Laurea Magistrale in Filosofia — LM-78</h3>
-        <p class="cv-job__date" data-i18n="edu.m.date">2017 — 2020</p>
-      </div>
-      <p class="cv-job__org" data-i18n="edu.m.org">Università di Pisa</p>
-      <ul class="cv-list">
-        <li data-i18n="edu.m.b1">Voto: <strong>110/110 con lode</strong>.</li>
-        <li data-i18n="edu.m.b2">Ambiti: logica matematica e semantica formale, filosofia del linguaggio, ontologia.</li>
+    <section class="cv-side__block">
+      <h2 class="cv-side__title" data-i18n="cv.contacts.title">Contatti</h2>
+      <ul class="cv-side__list cv-contacts">
+        <li>Empoli (FI)</li>
+        <li><a href="tel:+393888109755">+39 388 810 9755</a></li>
+        <li><a href="mailto:luca.antonini@protonmail.com">luca.antonini@protonmail.com</a></li>
+        <li><a href="https://antoniniluca.it" target="_blank" rel="noopener noreferrer">antoniniluca.it</a></li>
       </ul>
-    </article>
+    </section>
 
-    <article class="cv-edu">
-      <div class="cv-job__head">
-        <h3 class="cv-edu__degree" data-i18n="edu.b.degree">Laurea Triennale in Filosofia — L-5</h3>
-        <p class="cv-job__date" data-i18n="edu.b.date">2013 — 2017</p>
+    <!-- Il livello è quello dichiarato nel curriculum: tre tacche su tre = avanzato. -->
+    <section class="cv-side__block">
+      <h2 class="cv-side__title" data-i18n="cv.skills.machine">Tecniche</h2>
+
+      <div class="cv-lvl">
+        <p class="cv-lvl__row">
+          <span class="cv-lvl__name">SQL</span>
+          <span class="cv-lvl__tag" data-i18n="cv.level.adv">Avanzato</span>
+        </p>
+        <span class="cv-lvl__bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>
       </div>
-      <p class="cv-job__org" data-i18n="edu.b.org">Università di Pisa</p>
-      <ul class="cv-list">
-        <li data-i18n="edu.b.b1">Voto: <strong>110/110 con lode</strong>.</li>
-        <li data-i18n="edu.b.b2">Ambiti: logica matematica e semantica formale, filosofia del linguaggio, ontologia.</li>
+
+      <div class="cv-lvl">
+        <p class="cv-lvl__row">
+          <span class="cv-lvl__name">Python</span>
+          <span class="cv-lvl__tag" data-i18n="cv.level.adv">Avanzato</span>
+        </p>
+        <span class="cv-lvl__bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+      </div>
+    </section>
+
+    <section class="cv-side__block">
+      <h2 class="cv-side__title" data-i18n="cv.skills.tools">Strumenti</h2>
+      <ul class="cv-side__list">
+        <li>IBM DataStage</li>
+        <li>Apache Airflow</li>
+        <li>Starburst</li>
+        <li>Oracle PL/SQL</li>
+        <li>SQL Server</li>
+        <li>S3</li>
+        <li>Git</li>
+        <li>Jira</li>
       </ul>
-    </article>
-  </section>
+    </section>
 
-  <!-- ============ COMPETENZE ============ -->
-  <section class="cv-section">
-    <h2 class="cv-section__title" data-i18n="cv.skills.title">Competenze</h2>
-    <dl class="cv-skills">
-      <dt data-i18n="cv.skills.machine">Tecniche</dt>
-      <dd data-i18n="cv.skills.machine.v">SQL (avanzato) · Python (avanzato)</dd>
+    <section class="cv-side__block">
+      <h2 class="cv-side__title" data-i18n="cv.skills.lang">Lingue</h2>
+      <ul class="cv-side__list" data-i18n="cv.skills.lang.v">
+        <li>Italiano (madrelingua)</li>
+        <li>Inglese (B2/C1)</li>
+      </ul>
+    </section>
 
-      <dt data-i18n="cv.skills.tools">Strumenti</dt>
-      <dd>IBM DataStage · Apache Airflow · Starburst · Oracle PL/SQL · SQL Server · S3 · Git · Jira</dd>
+    <section class="cv-side__block">
+      <h2 class="cv-side__title" data-i18n="cv.skills.soft">Soft skill</h2>
+      <ul class="cv-side__list" data-i18n="cv.skills.soft.v">
+        <li>Approccio logico</li>
+        <li>Problem solving</li>
+        <li>Lavoro in team</li>
+      </ul>
+    </section>
 
-      <dt data-i18n="cv.skills.lang">Lingue</dt>
-      <dd data-i18n="cv.skills.lang.v">Italiano (madrelingua) · Inglese (B2/C1)</dd>
+    <section class="cv-side__block">
+      <h2 class="cv-side__title" data-i18n="cv.int.title">Interessi</h2>
+      <ul class="cv-side__list" data-i18n="cv.int.v">
+        <li>Logica e semantica formale</li>
+        <li>Data management</li>
+        <li>Epistemologia e metodologia</li>
+      </ul>
+    </section>
 
-      <dt data-i18n="cv.skills.soft">Soft skill</dt>
-      <dd data-i18n="cv.skills.soft.v">Approccio logico · Problem solving · Lavoro in team</dd>
+  </aside>
 
-      <dt data-i18n="cv.int.title">Interessi</dt>
-      <dd data-i18n="cv.int.v">Logica e semantica formale · Data management · Epistemologia e metodologia</dd>
-    </dl>
-  </section>
+  <!-- ============ COLONNA PRINCIPALE ============ -->
+  <div class="cv-main">
 
-  <!-- ============ PROGETTI ============ -->
-  <section class="cv-section cv-section--last">
-    <h2 class="cv-section__title" data-i18n="cv.proj.title">Progetti</h2>
-    <article class="cv-proj">
-      <div class="cv-job__head">
-        <h3 class="cv-proj__name">CraveIt</h3>
-        <p class="cv-job__date" data-i18n="proj.craveit.org">Università di Pisa</p>
-      </div>
-      <p class="cv-task__summary" data-i18n="cv.proj.craveit.body">
-        Implementazione di metodi di text analytics per classificare i migliori ristoranti di Roma.
+    <!-- ---- profilo ---- -->
+    <section class="cv-section">
+      <h2 class="cv-section__title" data-i18n="cv.profile">Profilo</h2>
+      <p class="cv-profile" data-i18n="about.body">
+        Back-end developer specializzato nella realizzazione di processi ETL per gruppi bancari e
+        assicurativi internazionali, con esperienza in SQL, IBM DataStage e Python con Apache Airflow.
+        Lavoro sull'elaborazione e la trasformazione dei dati e progetto datamart e database a supporto
+        di reportistica e analisi di business. Con particolare attenzione alla <em>data quality</em>,
+        ottimizzo i workflow e garantisco processi robusti e conformi agli standard aziendali.
       </p>
-      <p class="cv-proj__link">
-        <a href="https://andrevitali.github.io/g8-2024-website/index">andrevitali.github.io/g8-2024-website</a>
-      </p>
-    </article>
-  </section>
+    </section>
 
+    <!-- ---- esperienza ---- -->
+    <section class="cv-section">
+      <h2 class="cv-section__title" data-i18n="cv.exp.title">Esperienza professionale</h2>
 
+      <article class="cv-job">
+        <div class="cv-job__head">
+          <div>
+            <h3 class="cv-job__role" data-i18n="exp.employer.role">ETL Developer</h3>
+            <p class="cv-job__org">Advancia Technology <span class="dot">·</span> <span data-i18n="exp.employer.place">Italia</span></p>
+          </div>
+          <p class="cv-date" data-i18n="exp.employer.period">Set 2022 — oggi</p>
+        </div>
+
+        <div class="cv-task">
+          <div class="cv-task__head">
+            <p class="cv-task__client">
+              <span class="cv-task__label" data-i18n="cv.exp.client">Cliente</span>
+              <span class="nw">BNP Cardif</span>
+            </p>
+            <p class="cv-date" data-i18n="exp.e1.date">Gen 2025 — oggi</p>
+          </div>
+          <p class="cv-task__summary" data-i18n="exp.e1.summary">
+            Ricostruzione e migrazione dei database verso tecnologie Big Data, con i processi
+            di data quality e le pipeline di elaborazione al centro del progetto.
+          </p>
+          <ul class="cv-list">
+            <li data-i18n="exp.e1.b1">Pipeline end-to-end progettate e sviluppate con Apache Airflow, interamente in Python.</li>
+            <li data-i18n="exp.e1.b2">Controlli di data quality implementati come procedure SQL.</li>
+            <li data-i18n="exp.e1.b3">Database ottimizzati tramite partizionamento delle tabelle e tuning delle query.</li>
+          </ul>
+          <p class="cv-stack"><span class="cv-stack__label" data-i18n="exp.label.stack">Tech stack</span>
+            Starburst <span class="dot">·</span> SQL (Trino/Presto) <span class="dot">·</span> Python <span class="dot">·</span> Airflow <span class="dot">·</span> S3 <span class="dot">·</span> Git</p>
+        </div>
+
+        <div class="cv-task">
+          <div class="cv-task__head">
+            <p class="cv-task__client">
+              <span class="cv-task__label" data-i18n="cv.exp.clients">Clienti</span>
+              <span class="nw">Santander Consumer Bank</span> <span class="dot">·</span>
+              <span class="nw">Findomestic</span> <span class="dot">·</span>
+              <span class="nw">Banco BPM</span>
+            </p>
+            <p class="cv-date" data-i18n="exp.e2.date">Set 2022 — Dic 2024</p>
+          </div>
+          <p class="cv-task__summary" data-i18n="exp.e2.summary">
+            Sviluppo e manutenzione di procedure ETL a supporto di reportistica, vigilanza
+            regolamentare e processi di chiusura contabile.
+          </p>
+          <ul class="cv-list">
+            <li data-i18n="exp.e2.b1">Datamart e database progettati e realizzati a supporto dell'elaborazione dei dati e della reportistica per l'utente finale.</li>
+            <li data-i18n="exp.e2.b2">Data quality gestita e monitorata per garantire coerenza, robustezza e affidabilità dei processi.</li>
+            <li data-i18n="exp.e2.b3">Anomalie nei sistemi ETL individuate e risolte grazie a un monitoraggio continuo.</li>
+            <li data-i18n="exp.e2.b4">Testing su qualità e integrità del dato, in particolare nell'ambito della vigilanza bancaria.</li>
+          </ul>
+          <p class="cv-stack"><span class="cv-stack__label" data-i18n="exp.label.stack2">Tech stack</span>
+            Oracle PL/SQL <span class="dot">·</span> SQL Server <span class="dot">·</span> IBM DataStage</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ---- formazione ---- -->
+    <section class="cv-section">
+      <h2 class="cv-section__title" data-i18n="cv.edu.title">Formazione</h2>
+
+      <article class="cv-edu">
+        <div class="cv-job__head">
+          <h3 class="cv-edu__degree" data-i18n="edu.m.degree">Laurea Magistrale in Filosofia — LM-78</h3>
+          <p class="cv-date" data-i18n="edu.m.date">2017 — 2020</p>
+        </div>
+        <p class="cv-edu__org" data-i18n="edu.m.org">Università di Pisa</p>
+        <p class="cv-edu__meta" data-i18n="cv.edu.m.meta">Voto: <strong>110/110 con lode</strong>. Logica matematica e semantica formale, filosofia del linguaggio, ontologia.</p>
+      </article>
+
+      <article class="cv-edu">
+        <div class="cv-job__head">
+          <h3 class="cv-edu__degree" data-i18n="edu.b.degree">Laurea Triennale in Filosofia — L-5</h3>
+          <p class="cv-date" data-i18n="edu.b.date">2013 — 2017</p>
+        </div>
+        <p class="cv-edu__org" data-i18n="edu.b.org">Università di Pisa</p>
+        <p class="cv-edu__meta" data-i18n="cv.edu.b.meta">Voto: <strong>110/110 con lode</strong>. Logica matematica e semantica formale, filosofia del linguaggio, ontologia.</p>
+      </article>
+    </section>
+
+    <!-- ---- progetti ---- -->
+    <section class="cv-section">
+      <h2 class="cv-section__title" data-i18n="cv.proj.title">Progetti</h2>
+      <article class="cv-proj">
+        <div class="cv-job__head">
+          <h3 class="cv-proj__name">CraveIt</h3>
+          <p class="cv-proj__org" data-i18n="proj.craveit.org">Università di Pisa</p>
+        </div>
+        <p class="cv-task__summary" data-i18n="cv.proj.craveit.body">
+          Implementazione di metodi di text analytics per classificare i migliori ristoranti di Roma.
+        </p>
+        <p class="cv-proj__link">
+          <a href="https://andrevitali.github.io/g8-2024-website/index">andrevitali.github.io/g8-2024-website</a>
+        </p>
+      </article>
+    </section>
+
+  </div>
 </main>
 
 <script src="assets/js/i18n.js"></script>
